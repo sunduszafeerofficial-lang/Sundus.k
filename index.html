@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sundus Book Store</title>
+
+  📖 <b>Preorders Open</b> • Shipping starts in <b>5 days</b>
+</div>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f6efe7;color:#3b2a20}
+
+
+/* NAVBAR */
+.navbar{
+  background:#3b2a20;
+  padding:16px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  color:#fff;
+  font-size:24px;
+}
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:28px;
+}
+.nav-links a{
+  color:#fff;
+  text-decoration:none;
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* HERO */
+.hero{
+  padding:90px 50px;
+  max-width:900px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:52px;
+  margin-bottom:20px;
+}
+.hero p{
+  font-size:18px;
+  color:#6b4a37;
+  line-height:1.7;
+  margin-bottom:35px;
+}
+
+/* BUTTONS */
+.buttons a{
+  display:inline-block;
+  padding:12px 32px;
+  margin-right:15px;
+  border-radius:30px;
+  font-size:15px;
+  text-decoration:none;
+  transition:.3s;
+}
+.btn-dark{background:#3b2a20;color:#fff}
+.btn-dark:hover{background:#5c4630}
+.btn-outline{
+  border:2px solid #3b2a20;
+  color:#3b2a20;
+}
+.btn-outline:hover{background:#3b2a20;color:#fff}
+
+/* AUTHOR */
+.author{margin-top:60px}
+.author h2{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  margin-bottom:12px;
+}
+.author p{font-size:16px;line-height:1.8}
+
+/* REVIEWS */
+.reviews{
+  background:#fffaf5;
+  padding:70px 50px;
+}
+.reviews h2{
+  font-family:'Playfair Display',serif;
+  margin-bottom:30px;
+}
+.review-card{
+  max-width:650px;
+  background:#f6efe7;
+  padding:25px;
+  border-radius:14px;
+  margin-bottom:20px;
+}
+.review-card p{
+  font-size:15px;
+  line-height:1.7;
+}
+.review-card span{
+  display:block;
+  margin-top:10px;
+  font-size:14px;
+  color:#6b4a37;
+}
+
+/* FOOTER */
+footer{
+  background:#3b2a20;
+  color:#f6efe7;
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .navbar{flex-direction:column;gap:12px}
+  .hero,.reviews{padding:60px 25px}
+  .hero h1{font-size:40px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="logo">Sundus Book Store</div>
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+    <li><a href="book.html"><i class="fa fa-book"></i>Buy Book</a></li>
+    <li><a href="author.html"><i class="fa fa-user"></i>Author</a></li>
+    <li><a href="contact.html"><i class="fa fa-envelope"></i>Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Welcome to Sundus Book Store</h1>
+  <p>
+    Books that respect your time, thoughts, and inner peace.
+    Simple words. Deep meaning. Honest writing.
+  </p>
+
+  <div class="buttons">
+    <a href="book.html" class="btn-dark">
+      <i class="fa fa-shopping-bag"></i> Buy the Book
+    </a>
+    <a href="author.html" class="btn-outline">
+      <i class="fa fa-user"></i> About the Author
+    </a>
+  </div>
+
+  <div class="author">
+    <h2>About the Author — Sundus Zafeer</h2>
+    <p>
+      Sundus Zafeer is a student and emerging writer who believes in
+      clarity, reflection, and mindful thinking. Her work is calm,
+      honest, and written for readers who value depth over noise.
+    </p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <h2>Reader Reviews</h2>
+
+  <div class="review-card">
+    <p>“A calm and thoughtful reading experience that truly respects your time.”</p>
+    <span>— Verified Reader</span>
+  </div>
+
+  <div class="review-card">
+    <p>“Simple words, deep meaning. A refreshing and reflective read.”</p>
+    <span>— Online Customer</span>
+  </div>
+
+  <div class="review-card">
+    <p>“This book helps you slow down and connect with your own thoughts.”</p>
+    <span>— Independent Reader</span>
+  </div>
+</section>
+
+<footer>
+  © 2026 Sundus Book Store · All Rights Reserved
+</footer>
+<!-- FOOTER -->
+<div style="
+  margin-top:50px;
+  padding:20px;
+  text-align:center;
+  font-size:14px;
+  background:#faf7f3;
+">
+  <a href="privacy.html" style="margin:0 10px; text-decoration:none; color:#333;">
+    Privacy Policy
+  </a>
+  |
+  <a href="refund.html" style="margin:0 10px; text-decoration:none; color:#333;">
+    Return & Refund Policy
+  </a>
+</div>
+
+</body>
+</html>

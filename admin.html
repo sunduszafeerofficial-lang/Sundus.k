@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin – Orders</title>
+<style>
+body{font-family:Arial;background:#f6efe7;padding:30px}
+h1{margin-bottom:20px}
+.card{background:#fff;padding:15px;margin-bottom:15px;border-radius:10px}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px}
+.cod{background:#ffe6cc}
+.online{background:#d4f8d4}
+</style>
+</head>
+<body>
+
+<h1>📦 Orders Dashboard</h1>
+<div id="orders"></div>
+
+<script>
+fetch("http://localhost:5000/orders")
+.then(res=>res.json())
+.then(data=>{
+  const box=document.getElementById("orders");
+  data.reverse().forEach(o=>{
+    box.innerHTML+=`
+      <div class="card">
+        <b>${o.book}</b><br>
+        ${o.name} – ${o.phone || o.mobile}<br>
+        ₹${o.price} 
+        <span class="badge ${o.payment==="COD"?"cod":"online"}">
+          ${o.payment}
+        </span><br>
+        ${o.address}
+      </div>`;
+  });
+});
+</script>
+
+</body>
+</html>

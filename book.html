@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>When Your Mind Is Loud – Trust Allah | Sundus Book Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- RAZORPAY -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#f6efe7;
+  color:#2c1d16;
+}
+
+/* HEADER */
+.header{
+  padding:16px 28px;
+  background:#fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  font-weight:700;
+}
+
+/* MAIN CARD */
+.container{
+  max-width:900px;
+  margin:30px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
+/* BOOK */
+.book{
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+/* PREMIUM TEXT COVER (FAKE COVER – INTENTIONAL) */
+.fake-cover{
+  width:260px;
+  height:360px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#2c1d16,#5c4630);
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:24px;
+  box-shadow:0 25px 50px rgba(0,0,0,.35);
+}
+.fake-cover h2{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  margin-bottom:10px;
+}
+.fake-cover span{
+  font-size:15px;
+  letter-spacing:1px;
+  opacity:.9;
+}
+
+/* DETAILS */
+.book h1{
+  font-family:'Playfair Display',serif;
+  font-size:30px;
+  margin:0 0 10px;
+}
+.price{
+  font-size:22px;
+  font-weight:600;
+  margin:12px 0;
+}
+
+/* BUTTONS */
+.buttons button{
+  padding:12px 26px;
+  border:none;
+  border-radius:30px;
+  font-size:15px;
+  cursor:pointer;
+  margin:6px 10px 6px 0;
+  transition:.3s;
+}
+.cod{background:#3b2a20;color:#fff}
+.online{background:#fff;border:2px solid #3b2a20;color:#3b2a20}
+.cod:hover{background:#5c4630}
+.online:hover{background:#3b2a20;color:#fff}
+
+/* FORMS */
+.form{
+  display:none;
+  margin-top:25px;
+}
+.form input,.form textarea{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+/* ABOUT BOOK */
+.about{
+  margin-top:40px;
+}
+.about h2{
+  font-family:'Playfair Display',serif;
+  font-size:26px;
+  margin-bottom:12px;
+}
+.about p, .about li{
+  font-size:15px;
+  line-height:1.9;
+  color:#4a372c;
+}
+
+/* SUCCESS */
+.success{
+  display:none;
+  max-width:520px;
+  margin:40px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  text-align:center;
+}
+.order-box{
+  text-align:left;
+  background:#faf7f3;
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+}
+.order-box p{margin:6px 0}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">Sundus Book Store</div>
+</div>
+
+<!-- MAIN -->
+<div class="container" id="mainPage">
+
+  <div class="book">
+    <!-- FAKE / TEXT BOOK COVER -->
+    <div class="fake-cover">
+      <h2>When Your Mind Is Loud</h2>
+      <span>TRUST ALLAH</span>
+    </div>
+
+    <!-- DETAILS -->
+    <div>
+      <h1>When Your Mind Is Loud – Trust Allah</h1>
+      <p>For calm minds, reflection & faith.</p>
+      <div class="price">₹299</div>
+
+      <div class="buttons">
+        <button class="cod" onclick="showCOD()">Cash on Delivery</button>
+        <button class="online" onclick="showOnline()">Online Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COD FORM -->
+  <div class="form" id="codForm">
+    <h3>Cash on Delivery Details</h3>
+    <input id="codName" placeholder="Full Name">
+    <input id="codMobile" placeholder="Mobile Number">
+    <textarea id="codAddress" placeholder="Full Address"></textarea>
+    <button class="cod" onclick="placeCOD()">Place Order</button>
+  </div>
+
+  <!-- ONLINE FORM -->
+  <div class="form" id="onlineForm">
+    <h3>Online Payment Details</h3>
+    <input id="onName" placeholder="Full Name">
+    <input id="onMobile" placeholder="Mobile Number">
+    <textarea id="onAddress" placeholder="Full Address"></textarea>
+    <button class="online" onclick="payOnline()">Pay with Razorpay</button>
+  </div>
+
+  <!-- ABOUT BOOK -->
+  <div class="about">
+    <h2>What’s Inside This Book?</h2>
+    <p>
+      <b>When Your Mind Is Loud – Trust Allah</b> is a gentle companion for moments
+      when thoughts feel overwhelming. This book offers calm reminders, faith-based
+      reflections, and emotional clarity without pressure or heaviness.
+    </p>
+    <ul>
+      <li>🌿 Short reflections for overthinking minds</li>
+      <li>🌿 Faith-rooted reminders to trust Allah</li>
+      <li>🌿 Comfort during anxiety and self-doubt</li>
+      <li>🌿 Easy, peaceful reading experience</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SUCCESS PAGE -->
+<div class="success" id="successPage">
+  <h2>✅ Order Confirmed</h2>
+  <p>Thank you for shopping with Sundus Book Store</p>
+
+  <div class="order-box">
+    <p><b>Book:</b> When Your Mind Is Loud – Trust Allah</p>
+    <p><b>Price:</b> ₹299</p>
+    <p><b>Payment:</b> <span id="payType"></span></p>
+    <hr>
+    <p><b>Name:</b> <span id="sName"></span></p>
+    <p><b>Mobile:</b> <span id="sMobile"></span></p>
+    <p><b>Address:</b> <span id="sAddress"></span></p>
+  </div>
+</div>
+
+<script>
+const codForm=document.getElementById("codForm");
+const onlineForm=document.getElementById("onlineForm");
+const successPage=document.getElementById("successPage");
+const mainPage=document.getElementById("mainPage");
+
+function showCOD(){
+  codForm.style.display="block";
+  onlineForm.style.display="none";
+}
+function showOnline(){
+  onlineForm.style.display="block";
+  codForm.style.display="none";
+}
+
+function showSuccess(name,mobile,address,payment){
+  mainPage.style.display="none";
+  successPage.style.display="block";
+  sName.innerText=name;
+  sMobile.innerText=mobile;
+  sAddress.innerText=address;
+  payType.innerText=payment;
+}
+
+function placeCOD(){
+  let name=codName.value, mobile=codMobile.value, address=codAddress.value;
+  if(!name||!mobile||!address){alert("Fill all fields");return;}
+  showSuccess(name,mobile,address,"Cash on Delivery");
+}
+
+function payOnline(){
+  let name=onName.value, mobile=onMobile.value, address=onAddress.value;
+  if(!name||!mobile||!address){alert("Fill all fields");return;}
+
+  new Razorpay({
+    key:"rzp_test_SCMzT3nWQ2HoDh",
+    amount:29900,
+    currency:"INR",
+    name:"Sundus Book Store",
+    description:"When Your Mind Is Loud – Trust Allah",
+    handler:function(){
+      showSuccess(name,mobile,address,"Online (Razorpay)");
+    }
+  }).open();
+}
+</script>
+<a href="javascript:history.back()" style="
+  display:inline-block;
+  margin:15px;
+  font-size:14px;
+  color:#111;
+  text-decoration:none;
+">
+⬅ Back
+</a>
+
+</body>
+</html>

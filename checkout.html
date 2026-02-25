@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Sundus Book Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body{
+  font-family:'Inter',sans-serif;
+  background:#f6efe7;
+  color:#3b2a20;
+  padding:0;
+  margin:0;
+}
+.navbar{
+  background:#3b2a20;
+  padding:16px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.logo{
+  color:#fff;
+  font-family:'Playfair Display', serif;
+  font-size:22px;
+  font-weight:600;
+}
+.navbar a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:15px;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:50px 20px;
+}
+h1{font-family:'Playfair Display',serif;margin-bottom:30px;}
+.order-summary{
+  background:#fffaf5;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:30px;
+}
+.order-item{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 0;
+  border-bottom:1px solid #e0d2c4;
+}
+.order-item:last-child{
+  border-bottom:none;
+}
+.total{
+  font-weight:700;
+  font-size:20px;
+  text-align:right;
+  margin-top:10px;
+}
+.form-section{
+  background:#fff;
+  padding:30px;
+  border-radius:12px;
+}
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:15px;
+}
+button{
+  cursor:pointer;
+  font-size:16px;
+  border:none;
+  border-radius:50px;
+  padding:12px 30px;
+  margin-right:15px;
+  transition:0.4s;
+  font-weight:600;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.cod-btn{
+  background:#3b2a20;
+  color:#fff;
+}
+.cod-btn:hover{
+  background:#5c4630;
+}
+.online-btn{
+  background:linear-gradient(90deg,#f6b26b,#e69138);
+  color:#fff;
+}
+.online-btn:hover{
+  background:linear-gradient(90deg,#e69138,#f6b26b);
+}
+.success{
+  display:none;
+  text-align:center;
+  padding:50px;
+}
+.success h1{font-size:36px;margin-bottom:20px;}
+.success p{font-size:18px;}
+@media(max-width:768px){
+  .order-item{flex-direction:column;align-items:flex-start;}
+  button{width:100%;margin-bottom:15px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">Sundus Book Store</div>
+  <div>
+    <a href="index.html"><i class="fa fa-home"></i> Home</a>
+    <a href="book-details.html"><i class="fa fa-book"></i> Books</a>
+    <a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a>
+    <a href="contact.html"><i class="fa fa-envelope"></i> Contact</a>
+  </div>
+</div>
+
+<div class="container">
+  <h1>Checkout</h1>
+
+  <!-- Order Summary -->
+  <div class="order-summary" id="orderSummary">
+    <h2>Order Summary</h2>
+    <!-- Items added dynamically -->
+  </div>
+
+  <!-- Checkout Form -->
+  <div class="form-section">
+    <h2>Shipping & Payment Details</h2>
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="email" id="email" placeholder="Email (for online payment)">
+    <input type="text" id="mobile" placeholder="Mobile Number" required>
+    <textarea id="address" placeholder="Full Address"></textarea>
+    <input type="text" id="city" placeholder="City">
+    <input type="text" id="pincode" placeholder="Pincode">
+
+    <div style="margin-bottom:20px;">
+      <button class="cod-btn" onclick="placeCODOrder()">Cash on Delivery</button>
+      <button class="online-btn" onclick="placeOnlineOrder()">Pay Online</button>
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  <div class="success" id="successPage">
+    <h1>✅ Order Successful</h1>
+    <p>Your order will be delivered soon. Thank you for shopping with Sundus Book Store 🤍</p>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+// Load cart items
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Display order summary
+const summary = document.getElementById('orderSummary');
+function displaySummary(){
+  summary.innerHTML = '<h2>Order Summary</h2>';
+  let total = 0;
+  cart.forEach(item=>{
+    total += item.price;
+    summary.innerHTML += `<div class="order-item"><span>${item.name}</span><span>₹${item.price}</span></div>`;
+  });
+  summary.innerHTML += `<div class="total">Total: ₹${total}</div>`;
+}
+displaySummary();
+
+// COD Order
+function placeCODOrder(){
+  const name=document.getElementById('name').value.trim();
+  const mobile=document.getElementById('mobile').value.trim();
+  const address=document.getElementById('address').value.trim();
+  if(!name||!mobile||!address){alert("Please fill all required fields"); return;}
+
+  // Hide form, show success
+  document.querySelector('.form-section').style.display='none';
+  document.getElementById('successPage').style.display='block';
+  localStorage.removeItem('cart');
+  cart=[];
+  displaySummary();
+
+  alert(`✅ COD Order received!\nName:${name}\nMobile:${mobile}\nAddress:${address}`);
+}
+
+// Online Payment
+function placeOnlineOrder(){
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const mobile=document.getElementById('mobile').value.trim();
+  const address=document.getElementById('address').value.trim();
+  if(!name||!mobile||!address){alert("Please fill all required fields"); return;}
+
+  const amount=cart.reduce((sum,item)=>sum+item.price*100,0); // in paise
+  fetch("http://localhost:5000/create-order",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({amount})
+  })
+  .then(res=>res.json())
+  .then(order=>{
+    var options={
+      key:"rzp_test_SCMzT3nWQ2HoDh",
+      amount:order.amount,
+      currency:"INR",
+      name:"Sundus Book Store",
+      description:"Book Purchase",
+      order_id:order.id,
+      prefill:{name,email,contact:mobile},
+      theme:{color:"#3b2a20"},
+      handler:function(response){
+        document.querySelector('.form-section').style.display='none';
+        document.getElementById('successPage').style.display='block';
+        localStorage.removeItem('cart');
+        cart=[];
+        displaySummary();
+        alert(`✅ ONLINE Order received!\nName:${name}\nMobile:${mobile}\nPayment ID:${response.razorpay_payment_id}`);
+      },
+      modal:{ondismiss:function(){alert("Payment cancelled.")}}
+    };
+    new Razorpay(options).open();
+  });
+}
+</script>
+<a href="javascript:history.back()" style="
+  display:inline-block;
+  margin:15px;
+  font-size:14px;
+  color:#111;
+  text-decoration:none;
+">
+⬅ Back
+</a>
+
+</body>
+</html>
